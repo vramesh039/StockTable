@@ -9,7 +9,7 @@ In this quick skill test you will need to accomplish a lite application that sho
  - Please complete this project alone. 
  - You can search for help in any site, use open-source components and use others public code with a comment. 
  - The estimation time for this project is a few hours. 
- - ** DO NOT PUSH CHANGES TO THIS REPO ** 
+ - **DO NOT PUSH CHANGES TO THIS REPO** 
  
  ## Instructions
  1. Fork this repository to you own Github account. 
