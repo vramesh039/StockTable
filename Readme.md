@@ -20,5 +20,5 @@ In this quick skill test, you will need to accomplish a lite application that sh
        c. A table that will be filled with stocks and update in real-time from the SignalR source. 
 5. The table result should look like in the StockTableUpdate.mp4 movie - except that the colors might be changed. 
 6. Create a DB and insert 10 last rows per symbole name with the latest changes. Keep it updated. 
-7. When you finish, push your repo changes and send the repo address to Adiel. Don't forget to add [Adiel-Sharabi]  as a collaborator to your repo. 
+7. When you finish, push your repo changes and add [Adiel-Sharabi]  as a collaborator to your repo. 
  
