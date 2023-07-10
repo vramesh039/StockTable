@@ -20,7 +20,8 @@ In this quick skill test, you will need to accomplish a lite application that sh
        b. Configuration - option to select a color for rising stock and a different color for downing stock
        c. A table that will be filled with stocks and updated in real-time from the SignalR source. 
 6. The table result should look like in the StockTableUpdate.mp4 movie - except that the colors might be changed. 
-7. Create a DB and insert 10 last rows per symbol name with the latest changes. Keep it updated. The connection should be with EF Core. And can be with LocalDB OR default SQL instance. Create a migration to set-up the database. 
-8. When you finish, push your repo changes and add [Adiel-Sharabi]  as a collaborator to your repo. 
+7. Create a DB and insert 10 last rows per symbol name with the latest changes. Keep it updated. The connection should be with EF Core. And can be with LocalDB OR default SQL instance. Create a migration to set-up the database.
+8. Prepare the solution for transfer - update the Readme.md with instructions what to do to build and run the solution.
+9. When you finish, push your repo changes and add [Adiel-Sharabi]  as a collaborator to your repo. 
 
   
