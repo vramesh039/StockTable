@@ -1,0 +1,83 @@
+﻿<Window x:Class="StockTable.MainWindow"
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	xmlns:local="clr-namespace:StockTable"
+        mc:Ignorable="d"
+	xmlns:toolkit="clr-namespace:Xceed.Wpf.Toolkit;assembly=DotNetProjects.Wpf.Extended.Toolkit"
+	xmlns:prism="http://prismlibrary.com/"
+        prism:ViewModelLocator.AutoWireViewModel="True"
+        Title="MainWindow" Height="450" Width="870" WindowStyle="None">
+	<Window.Resources>
+		<local:StockRowForegroundConverter x:Key="stockRowForegroundConverter" />
+		<local:StockChangeToImageConverter x:Key="stockChangeToImageConverter" />
+		<local:StockChangeInPriceConverter x:Key="stockChangeInPriceConverter" />
+	</Window.Resources>
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="*" />
+		</Grid.RowDefinitions>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="580" />
+			<ColumnDefinition Width="5" />
+			<ColumnDefinition Width="Auto" />
+		</Grid.ColumnDefinitions>
+		<TextBlock Text="Stock table" Margin="5" Foreground="Black" FontSize="18" />
+		<TextBlock Text="Configuration" Grid.Row="0" Grid.Column="2" Margin="5" Foreground="Black" FontSize="18" />
+		<DataGrid Grid.Row="1" ItemsSource="{Binding StockUpdates}" AutoGenerateColumns="False" Height="550" GridLinesVisibility="Vertical" Background="White">
+			<DataGrid.Columns>
+				<DataGridTextColumn Header="LastUpdated" Binding="{Binding LastUpdated, StringFormat='hh:mm:ss tt'}" Width="150" />
+				<DataGridTextColumn Header="Symbol" Binding="{Binding Symbol}"  Width="100"/>
+				<DataGridTextColumn Header="Price" Binding="{Binding Price}"  Width="100"/>
+				<DataGridTemplateColumn Header="Change" Width="220">
+					<DataGridTemplateColumn.CellTemplate>
+						<DataTemplate>
+							<StackPanel Orientation="Horizontal">
+								<TextBlock Width="100">
+									<TextBlock.Text>
+										<MultiBinding Converter="{StaticResource stockChangeInPriceConverter}">
+											<Binding Path="Change" />
+											<Binding Path="Price" />
+										</MultiBinding>
+									</TextBlock.Text>
+								</TextBlock>
+								<Image Source="{Binding Path=Change, Converter={StaticResource stockChangeToImageConverter}}" Width="16" Height="16" />
+								<TextBlock Text="{Binding Path=Change, StringFormat=P2}" Width="100" Margin="5,0,0,0"/>
+							</StackPanel>
+						</DataTemplate>
+					</DataGridTemplateColumn.CellTemplate>
+				</DataGridTemplateColumn>
+			</DataGrid.Columns>
+			<DataGrid.RowStyle>
+				<Style TargetType="DataGridRow">
+					<Setter Property="Foreground">
+						<Setter.Value>
+							<MultiBinding Converter="{StaticResource stockRowForegroundConverter}">
+								<Binding Path="Change" />
+								<Binding RelativeSource="{RelativeSource Mode=FindAncestor, AncestorType=Window}" Path="DataContext.RisingStockColor"/>
+								<Binding RelativeSource="{RelativeSource Mode=FindAncestor, AncestorType=Window}" Path="DataContext.DowingStockColor"/>
+							</MultiBinding>
+						</Setter.Value>
+					</Setter>
+				</Style>
+			</DataGrid.RowStyle>
+		</DataGrid>
+		<Border Grid.Row="1" Grid.Column="1" Background="Gray" />
+		<Grid Grid.Row="1" Grid.Column="2" Margin="5">
+			<Grid.RowDefinitions>
+				<RowDefinition Height="Auto" />
+				<RowDefinition Height="Auto" />
+			</Grid.RowDefinitions>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="150" />
+				<ColumnDefinition Width="100" />
+			</Grid.ColumnDefinitions>
+			<TextBlock Text="Rising stock Color:" />
+			<toolkit:ColorPicker SelectedColor="{Binding RisingStockColor}" Width="100" Grid.Column="1" />
+			<TextBlock Text="Dowing stock Color:" Grid.Row="1"  />
+			<toolkit:ColorPicker SelectedColor="{Binding DowingStockColor}" Width="100"  Grid.Row="1" Grid.Column="1"/>
+		</Grid>
+	</Grid>
+</Window>
